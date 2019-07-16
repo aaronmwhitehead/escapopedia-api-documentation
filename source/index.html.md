@@ -19,7 +19,7 @@ Welcome to the Escapopedia API! You can use our API to access Escapopedia endpoi
 
 We have example requests in JavaScript, which you can view in the dark area on the right side of the page.
 
-Check out the [Enpoints](http://127.0.0.1:4567/?javascript#endpoints) section for examples.
+Check out the [Enpoints](https://aaronmwhitehead.github.io/escapopedia-api-documentation/#endpoints) section for examples.
 
 ## Basics
 Each request uses the same request pattern for its body. The four attributes contained in the body are `fields`, `limit`, `offset`, and `query`. The value of these attributes change between endpoints, but a general description is shown below.

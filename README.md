@@ -1,115 +1,210 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/lord/img/master/logo-slate.png" alt="Slate: API Documentation Generator" width="226">
-  <br>
-  <a href="https://travis-ci.org/lord/slate"><img src="https://travis-ci.org/lord/slate.svg?branch=master" alt="Build Status"></a>
-</p>
+# Introduction
 
-<p align="center">Slate helps you create beautiful, intelligent, responsive API documentation.</p>
+Welcome to the Escapopedia API! You can use our API to access Escapopedia endpoints, which can get information on Rooms, Companies, Locations, and Franchises across the escape room universe.
 
-<p align="center"><img src="https://raw.githubusercontent.com/lord/img/master/screenshot-slate.png" width=700 alt="Screenshot of Example Documentation created with Slate"></p>
+We have example requests in JavaScript, which you can view in the dark area on the right side of the page.
 
-<p align="center"><em>The example above was created with Slate. Check it out at <a href="https://lord.github.io/slate">lord.github.io/slate</a>.</em></p>
+Check out the [Enpoints](https://aaronmwhitehead.github.io/escapopedia-api-documentation/#endpoints) section for examples.
 
-Features
-------------
+## Basics
+Each request uses the same request pattern for its body. The four attributes contained in the body are `fields`, `limit`, `offset`, and `query`. The value of these attributes change between endpoints, but a general description is shown below.
+### Request Body
 
-* **Clean, intuitive design** — With Slate, the description of your API is on the left side of your documentation, and all the code examples are on the right side. Inspired by [Stripe's](https://stripe.com/docs/api) and [PayPal's](https://developer.paypal.com/webapps/developer/docs/api/) API docs. Slate is responsive, so it looks great on tablets, phones, and even in print.
+Parameter | Default | Description
+--------- | ------- | -----------
+fields | All | An array of the specific data fields that you want to return.
+limit | 10 | The number of results you would like to return.
+offset | 0 | The number of results you would like to skip.
+query | { } | An object that contains the data you want to search for.
 
-* **Everything on a single page** — Gone are the days when your users had to search through a million pages to find what they wanted. Slate puts the entire documentation on a single page. We haven't sacrificed linkability, though. As you scroll, your browser's hash will update to the nearest header, so linking to a particular point in the documentation is still natural and easy.
+# Endpoints
 
-* **Slate is just Markdown** — When you write docs with Slate, you're just writing Markdown, which makes it simple to edit and understand. Everything is written in Markdown — even the code samples are just Markdown code blocks.
+## Companies
 
-* **Write code samples in multiple languages** — If your API has bindings in multiple programming languages, you can easily put in tabs to switch between them. In your document, you'll distinguish different languages by specifying the language name at the top of each code block, just like with GitHub Flavored Markdown.
+Get information on individual escape room companies.
 
-* **Out-of-the-box syntax highlighting** for [over 100 languages](https://github.com/jneen/rouge/wiki/List-of-supported-languages-and-lexers), no configuration required.
-
-* **Automatic, smoothly scrolling table of contents** on the far left of the page. As you scroll, it displays your current position in the document. It's fast, too. We're using Slate at TripIt to build documentation for our new API, where our table of contents has over 180 entries. We've made sure that the performance remains excellent, even for larger documents.
-
-* **Let your users update your documentation for you** — By default, your Slate-generated documentation is hosted in a public GitHub repository. Not only does this mean you get free hosting for your docs with GitHub Pages, but it also makes it simple for other developers to make pull requests to your docs if they find typos or other problems. Of course, if you don't want to use GitHub, you're also welcome to host your docs elsewhere.
-
-* **RTL Support** Full right-to-left layout for RTL languages such as Arabic, Persian (Farsi), Hebrew etc.
-
-Getting started with Slate is super easy! Simply fork this repository and follow the instructions below. Or, if you'd like to check out what Slate is capable of, take a look at the [sample docs](http://lord.github.io/slate).
-
-Getting Started with Slate
-------------------------------
-
-### Prerequisites
-
-You're going to need:
-
- - **Linux or macOS** — Windows may work, but is unsupported.
- - **Ruby, version 2.3.1 or newer**
- - **Bundler** — If Ruby is already installed, but the `bundle` command doesn't work, just run `gem install bundler` in a terminal.
-
-### Getting Set Up
-
-1. Fork this repository on GitHub.
-2. Clone *your forked repository* (not our original one) to your hard drive with `git clone https://github.com/YOURUSERNAME/slate.git`
-3. `cd slate`
-4. Initialize and start Slate. You can either do this locally, or with Vagrant:
-
-```shell
-# either run this to run locally
-bundle install
-bundle exec middleman server
-
-# OR run this to run with vagrant
-vagrant up
+```javascript
+axios({
+  url: "https://escapopedia.herokuapp.com/companies",
+  method: 'POST',
+  headers: {
+      'Accept': 'application/json',
+  },
+  data: {
+    'fields': [],
+    'query': {},
+    'offset': 0, 
+    'limit': 1
+  }
+})
+  .then(response => {
+      console.log(response.data);
+  })
+  .catch(err => {
+      console.error(err);
+  });
 ```
 
-You can now see the docs at http://localhost:4567. Whoa! That was fast!
+### Request URL
 
-Now that Slate is all set up on your machine, you'll probably want to learn more about [editing Slate markdown](https://github.com/lord/slate/wiki/Markdown-Syntax), or [how to publish your docs](https://github.com/lord/slate/wiki/Deploying-Slate).
+`http://escapopedia-herokuapp.com/companies`
 
-If you'd prefer to use Docker, instructions are available [in the wiki](https://github.com/lord/slate/wiki/Docker).
+Field | Type | Description
+--------- | ------- | -----------
+franchises | Array of reference IDs to Franchise | The Franchises that belong to the company
+locations | Array of reference IDs to Location | The Locations where the company has Franchises
+name | String | The name of the company
+reviews | Array of Strings | Reviews of the company
+rooms | Array of reference IDs to Room | The Rooms that belong to the company
+slug | string | A url-safe, unique, lower-case version of the name
 
-### Note on JavaScript Runtime
+## Franchises
 
-For those who don't have JavaScript runtime or are experiencing JavaScript runtime issues with ExecJS, it is recommended to add the [rubyracer gem](https://github.com/cowboyd/therubyracer) to your gemfile and run `bundle` again.
+Get information on individual escape room franchises.
 
-Companies Using Slate
----------------------------------
+```javascript
+axios({
+  url: "https://escapopedia.herokuapp.com/franchises",
+  method: 'POST',
+  headers: {
+      'Accept': 'application/json',
+  },
+  data: {
+    'fields': [],
+    'query': {},
+    'offset': 0, 
+    'limit': 1
+  }
+})
+  .then(response => {
+      console.log(response.data);
+  })
+  .catch(err => {
+      console.error(err);
+  });
+```
 
-* [NASA](https://api.nasa.gov)
-* [Sony](http://developers.cimediacloud.com)
-* [Best Buy](https://bestbuyapis.github.io/api-documentation/)
-* [Travis-CI](https://docs.travis-ci.com/api/)
-* [Greenhouse](https://developers.greenhouse.io/harvest.html)
-* [Woocommerce](http://woocommerce.github.io/woocommerce-rest-api-docs/)
-* [Dwolla](https://docs.dwolla.com/)
-* [Clearbit](https://clearbit.com/docs)
-* [Coinbase](https://developers.coinbase.com/api)
-* [Parrot Drones](http://developer.parrot.com/docs/bebop/)
-* [Scale](https://docs.scaleapi.com/)
+### Request URL
 
-You can view more in [the list on the wiki](https://github.com/lord/slate/wiki/Slate-in-the-Wild).
+`http://escapopedia-herokuapp.com/franchises`
 
-Questions? Need Help? Found a bug?
---------------------
+Field | Type | Description
+--------- | ------- | -----------
+address | String | The address of the franchise
+company | Reference ID to company | The Company that the franchise belongs to
+lat | Number | The latitude of the franchise
+lon | Number | The longitude of the franchise
+location | Reference ID to Location | The Location that the franchise belongs to 
+phone | String | The phone number of the franchise
+rooms | Array of reference IDs to Room | The Rooms located at the franchise
+website | String | The url leading to the website of the franchise
 
-If you've got questions about setup, deploying, special feature implementation in your fork, or just want to chat with the developer, please feel free to [start a thread in our Spectrum community](https://spectrum.chat/slate)!
+## Locations
 
-Found a bug with upstream Slate? Go ahead and [submit an issue](https://github.com/lord/slate/issues). And, of course, feel free to submit pull requests with bug fixes or changes to the `dev` branch.
+Get information on locations across the US that have escape rooms.
 
-Contributors
---------------------
+```javascript
+axios({
+  url: "https://escapopedia.herokuapp.com/locations",
+  method: 'POST',
+  headers: {
+      'Accept': 'application/json',
+  },
+  data: {
+    'fields': [],
+    'query': {},
+    'offset': 0, 
+    'limit': 1
+  }
+})
+  .then(response => {
+      console.log(response.data);
+  })
+  .catch(err => {
+      console.error(err);
+  });
+```
 
-Slate was built by [Robert Lord](https://lord.io) while interning at [TripIt](https://www.tripit.com/).
+### Request URL
 
-Thanks to the following people who have submitted major pull requests:
+`http://escapopedia-herokuapp.com/locations`
 
-- [@chrissrogers](https://github.com/chrissrogers)
-- [@bootstraponline](https://github.com/bootstraponline)
-- [@realityking](https://github.com/realityking)
-- [@cvkef](https://github.com/cvkef)
+Field | Type | Description
+--------- | ------- | -----------
+city_name | String | The name of the city or area
+companies | Array of reference IDs to Company | The Companies that have a Franchise at the location
+country | String | Country of the location
+franchises | Reference ID to Franchise | The Franchises that have a Room in the location
+rooms | Array of reference IDs to Room | The Rooms that have Companies or Franchises in the location
+state | String | The state of the location
 
-Also, thanks to [Sauce Labs](http://saucelabs.com) for sponsoring the development of the responsive styles.
+## Rooms
 
-Special Thanks
---------------------
-- [Middleman](https://github.com/middleman/middleman)
-- [jquery.tocify.js](https://github.com/gfranko/jquery.tocify.js)
-- [middleman-syntax](https://github.com/middleman/middleman-syntax)
-- [middleman-gh-pages](https://github.com/edgecase/middleman-gh-pages)
-- [Font Awesome](http://fortawesome.github.io/Font-Awesome/)
+Get information on individual escape rooms.
+
+```javascript
+axios({
+  url: "https://escapopedia.herokuapp.com/rooms",
+  method: 'POST',
+  headers: {
+      'Accept': 'application/json',
+  },
+  data: {
+    'fields': [],
+    'query': {},
+    'offset': 0, 
+    'limit': 1
+  }
+})
+  .then(response => {
+      console.log(response.data);
+  })
+  .catch(err => {
+      console.error(err);
+  });
+```
+
+### Request URL
+
+`http://escapopedia-herokuapp.com/rooms`
+
+Field | Type | Description
+--------- | ------- | -----------
+company | Reference ID to Company | The Company that the room belongs to
+description | String | A short description of the room 
+difficulty | Integer | Value on scale from 1-4 representing difficulty of room
+franchise | Reference ID to Franchise | The Franchise the the game belongs to
+images | Array of image URLs | Promotional images of the room
+location | Reference ID to Location | The Location that the room belongs to 
+max_players | Integer | The maximum number of players that are allowed to play the room
+min_players | Integer | The minimum number of players that are needed to play the room
+name | String | The name of the room
+reviews | Array of Strings | Reviews of the room
+slug | string | A url-safe, unique, lower-case version of the name
+tags | Array of Strings | Related entries in the database
+time_limit | Integer | Total amount of time given to escape the room
+
+# Reference
+
+## Queries
+You can add a query to your request to return only specific data. This query is an object where each key is a field belonging to the route that you are making a request to.
+
+For example, if you want to only query rooms where `max_players` is `7`, the `query` attribute in your request would be
+
+<aside>
+  query: { max_players: 7 }
+</aside>
+
+Escapopedia also supports all queries referenced in the [MongoDb Query Documents](https://docs.mongodb.com/manual/tutorial/query-documents/) page. 
+
+# Errors
+
+The Escapopedia API uses the following error codes:
+
+
+Code | Meaning
+---------- | -------
+400 | Bad Request -- Your request is invalid.
+404 | Not Found -- There are no results that match your query
+500 | Internal Server Error -- We had a problem with our server. Try again later.
+503 | Service Unavailable -- We're temporarily offline for maintenance. Please try again later.
