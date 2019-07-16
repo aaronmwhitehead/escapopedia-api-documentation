@@ -1,0 +1,57 @@
+@import '../shared/header.scss';
+@import '../shared/shared.scss';
+@import '../shared/footer.scss';
+
+.contact-card {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 525px;
+    height: 412px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+.logo-card {
+    font-size: 3em;
+}
+
+.title {
+    // margin: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+
+    input, textarea {
+        margin: 10px 0;
+        padding: 5px;
+        resize: none;
+        
+        &:focus {
+            outline: 0;
+        }
+    }
+
+    button {
+        margin: 15px 0;
+        width: 50%;
+        align-self: center;
+    }
+}
+
+@media (max-width: 600px) {  
+    .contact-card {
+        width: 100%;
+        padding: 0;
+        box-shadow: none;
+    }
+    body {
+        background: #fff;
+    }
+}
