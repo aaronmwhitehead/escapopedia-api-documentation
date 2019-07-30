@@ -47,7 +47,7 @@ axios({
 
 ### Request URL
 
-`http://escapopedia-herokuapp.com/companies`
+`https://escapopedia-herokuapp.com/companies`
 
 Field | Type | Description
 --------- | ------- | -----------
@@ -86,7 +86,7 @@ axios({
 
 ### Request URL
 
-`http://escapopedia-herokuapp.com/franchises`
+`https://escapopedia-herokuapp.com/franchises`
 
 Field | Type | Description
 --------- | ------- | -----------
@@ -127,7 +127,7 @@ axios({
 
 ### Request URL
 
-`http://escapopedia-herokuapp.com/locations`
+`https://escapopedia-herokuapp.com/locations`
 
 Field | Type | Description
 --------- | ------- | -----------
@@ -166,7 +166,7 @@ axios({
 
 ### Request URL
 
-`http://escapopedia-herokuapp.com/rooms`
+`https://escapopedia-herokuapp.com/rooms`
 
 Field | Type | Description
 --------- | ------- | -----------
