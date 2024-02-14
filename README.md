@@ -1,3 +1,6 @@
+## The Escapopedia API is now Obsolete due to lack of maintainence. I will keep this documentation here as a historical reference. 
+
+
 # Introduction
 
 Welcome to the Escapopedia API! You can use our API to access Escapopedia endpoints, which can get information on Rooms, Companies, Locations, and Franchises across the escape room universe.
